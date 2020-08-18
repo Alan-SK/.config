@@ -1,6 +1,6 @@
 # Here's my neovim configuration, and here's what to watch out for
 ## Preview
-![demo](https://hashx.cn/images/2020/08/18/ddvC.jpg)
+![demo][./demo.jpg]
 ## Here are the necessary software
 ### [中文版](https://gitee.com/alonelt/nvim) 
 - [ ] Neovim

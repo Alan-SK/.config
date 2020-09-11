@@ -52,10 +52,9 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === Snippets
 " ===
-let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsEditSplit="vertical"
-
+let g:UltiSnipsExpandTrigger="<tab>" 
+let g:UltiSnipsJumpForwardTrigger="<tab>" 
+let g:UltiSnipsJumpBackwardTrigger="<c-e>" 
 " ===
 " === Vimwiki
 " ===

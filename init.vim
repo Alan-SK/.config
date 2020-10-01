@@ -19,7 +19,7 @@ let g:airline_theme='one'
 " === Plug section
 " ===
 call plug#begin('~/.config/nvim/plugged')
-Plug 'vim-airline/vim-airline'
+Plug 'mkitt/tabline.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
@@ -43,6 +43,10 @@ call plug#end()
 " ===
 " === Map Section
 " ===
+inoremap <A-l> <Esc>$a
+inoremap <A-o> <Esc>o
+noremap <A-l> <Esc>$a
+noremap <A-o> <Esc>o
 noremap H 0
 noremap J 5j
 noremap K 5k
@@ -95,3 +99,7 @@ func! CompileRunText()
 		:term go run %
 	endif
 endfunction
+hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineSel   ctermfg=White  ctermbg=DarkBlue
+let g:tablineclosebutton=1

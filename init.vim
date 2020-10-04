@@ -1,16 +1,16 @@
- "__  ____   __  _   ___     _____ __  __ ____   ____ 
+"__  ____   __  _   ___     _____ __  __ ____   ____
 "|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
-"| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |    
-"| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___ 
+"| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
+"| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 " 我的github:https://github.com/Alan-SK
 " 我的QQ:
-" ____   ___   __  ____   ___ _____ ____  _  _   _ 
+" ____   ___   __  ____   ___ _____ ____  _  _   _
 "|___ \ / _ \ / /_|___ \ / _ \___  | ___|| || | / |
 "  __) | | | | '_ \ __) | (_) | / /|___ \| || |_| |
 " / __/| |_| | (_) / __/ \__, |/ /  ___) |__   _| |
 "|_____|\___/ \___/_____|  /_//_/  |____/   |_| |_|
-                                                  
+
 " ===
 " === System Set
 " ===
@@ -44,6 +44,8 @@ Plug 'flazz/vim-colorschemes' " vim主题包
 Plug 'suan/vim-instant-markdown',{'for': 'markdown'} "MarkDown预览
 Plug 'dhruvasagar/vim-table-mode' " MarkDown表格工具
 " 工具
+Plug 'Chiel92/vim-autoformat' " 代码格式化
+Plug 'rhysd/vim-fixjson',{'for': 'json' } " json格式化
 Plug 'MattesGroeger/vim-bookmarks' " 书签
 Plug 'airblade/vim-gitgutter' " git状态查询
 Plug 'voldikss/vim-floaterm' " 浮动终端
@@ -103,7 +105,7 @@ noremap R :source ~/.config/nvim/init.vim<Cr>
 noremap <leader>rc :e ~/.config/nvim/init.vim<Cr>
 noremap S :w<Cr>
 noremap Q :q<Cr>
-noremap <C-l> :FloatermNew 
+noremap <C-l> :FloatermNew
 noremap tx :r !figlet
 noremap tt :NERDTreeToggle<Cr>
 map * <nop>
@@ -117,9 +119,9 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === Snippets
 " ===
-let g:UltiSnipsExpandTrigger="<tab>" 
-let g:UltiSnipsJumpForwardTrigger="<c-j>" 
-let g:UltiSnipsJumpBackwardTrigger="<c-k>" 
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " ===
 " === Vimwiki
 " ===
@@ -189,3 +191,7 @@ set termguicolors
 hi NonText ctermfg=gray guifg=grey10
 source ~/.config/nvim/plugged/vim-deus/colors/deus.vim
 let g:airline_theme='dracula'
+" ===
+" === FixJson
+" ===
+au BufWrite *.json :FixJson

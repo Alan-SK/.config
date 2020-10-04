@@ -7,6 +7,7 @@
 " ===
 " === System Set
 " ===
+set showcmd
 set splitbelow
 set nohlsearch
 set scrolloff=5
@@ -18,43 +19,55 @@ set hidden
 set cursorline
 syntax on
 let mapleader = " "
-set background=dark
-let g:airline_theme='one'
-
+set hlsearch
 " ===
 " === Plug section
 " ===
 call plug#begin('~/.config/nvim/plugged')
-Plug 'farmergreg/vim-lastplace'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'lfv89/vim-interestingwords'
-Plug 'itchyny/vim-cursorword'
-Plug 'mkitt/tabline.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'Yggdroot/indentLine'
-Plug 'preservim/nerdtree'
-Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdcommenter'
-Plug 'frazrepo/vim-rainbow'
-Plug 'kshenoy/vim-signature'
-Plug 'ferranpm/vim-autopairs'
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'flazz/vim-colorschemes'
-Plug 'voldikss/vim-floaterm'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'rakr/vim-one'
-Plug 'vimwiki/vimwiki'
+" 美化
+Plug 'vim-airline/vim-airline' " airline(状态栏)
+Plug 'vim-airline/vim-airline-themes' " airline主题
+Plug 'rakr/vim-one' "主题
+Plug 'dracula/vim' " airline主题
+Plug 'liuchengxu/space-vim-theme' " 一款全局主题
+Plug 'theniceboy/vim-deus' " 主题:deus
+Plug 'mkitt/tabline.vim' " 状态栏(不会用啊啊啊)
+Plug 'flazz/vim-colorschemes' " vim主题包
+" MarkDown
+Plug 'suan/vim-instant-markdown',{'for': 'markdown'} "MarkDown预览
+Plug 'dhruvasagar/vim-table-mode' " MarkDown表格工具
+" 工具
+Plug 'MattesGroeger/vim-bookmarks' " 书签
+Plug 'airblade/vim-gitgutter' " git状态查询
+Plug 'voldikss/vim-floaterm' " 浮动终端
+Plug 'preservim/nerdcommenter' " 注释工具
+Plug 'easymotion/vim-easymotion' " 简单的移动
+Plug 'preservim/nerdtree' " 文件树
+Plug 'farmergreg/vim-lastplace' " 回到上次预览的位置
+" 代码预览
+Plug 'lfv89/vim-interestingwords' " 代码颜色高亮(<leader>k)
+Plug 'frazrepo/vim-rainbow' " 彩色括号(写json就看出来了)
+Plug 'itchyny/vim-cursorword' " 单词下划线
+Plug 'Yggdroot/indentLine' " 缩进提示
+" 代码补全
+Plug 'kshenoy/vim-signature' " 忘了
+Plug 'ferranpm/vim-autopairs' " 自动括号补全
+Plug 'honza/vim-snippets' " 代码块大全
+Plug 'SirVer/ultisnips' " 代码块主程序
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc代码补全
+" 文件寻找
+Plug 'junegunn/fzf' " 模糊文件查找
+" 笔记
+Plug 'vimwiki/vimwiki' " 使用<leader>ww
 call plug#end()
 
 " ===
-" === Map Section
+" === Map部分
 " ===
+noremap <leader><leader> <Esc>:nohlsearch<Cr>
+noremap <leader>r <Esc>:term ranger<Cr>
+noremap <leader>R <Esc>:set splitbelow<Cr>:sp<Cr>:term ranger<Cr>
+noremap ; :
 noremap sk :set nosplitbelow<Cr>:split<Cr>
 noremap sj :set splitbelow<Cr>:split<Cr>
 noremap sh :set nosplitright<Cr>:vsplit<Cr>
@@ -66,9 +79,6 @@ noremap <Up> :res +5<Cr>
 noremap <Down> :res -5<Cr>
 noremap <Left> :vertical resize-5<Cr>
 noremap <Right> :vertical resize+5<Cr>
-noremap nt :tabe<Cr>
-noremap th :-tabnext<Cr>
-noremap tl :+tabnext<Cr>
 inoremap <A-l> <Esc>$a
 inoremap <A-o> <Esc>o
 noremap <A-l> <Esc>$a
@@ -89,11 +99,10 @@ noremap <C-l> :FloatermNew
 noremap tx :r !figlet
 noremap tt :NERDTreeToggle<Cr>
 " ===
-" === Source Section
+" === Source部分
 " ===
 source ~/.config/nvim/CocConfig.vim
 source ~/.config/nvim/md-snippets.vim
-source ~/.config/nvim/plugged/vim-colorschemes/colors/molokai.vim
 source ~/.config/nvim/_machine_specific.vim
 
 " ===
@@ -114,7 +123,9 @@ au FileType c,cpp,objc,objcpp,py,sh,fish,md,json,ts,js,html call rainbow#load()
 " === indentLine
 " ===
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
+" ===
+" === 代码编译器
+" ===
 noremap r :call CompileRunText()<Cr>
 func! CompileRunText()
 	exec "w"
@@ -128,8 +139,14 @@ func! CompileRunText()
 		set splitbelow
 		:sp
 		:term go run %
+	elseif &filetype == 'markdown'
+		:InstantMarkdownPreview<Cr>
+
 	endif
 endfunction
+" ===
+" === Tabline
+" ===
 hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
 hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=DarkBlue
@@ -151,3 +168,15 @@ let g:bookmark_highlight_lines = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+" ===
+" === InstantMarkdownPreview
+" ===
+let g:instant_markdown_browser = "firefox --new-window"
+let g:instant_markdown_port = 8888
+" ===
+" === 全局美化
+" ===
+set termguicolors
+hi NonText ctermfg=gray guifg=grey10
+source ~/.config/nvim/plugged/vim-deus/colors/deus.vim
+let g:airline_theme='dracula'

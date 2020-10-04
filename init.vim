@@ -3,7 +3,14 @@
 "| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |    
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___ 
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
-                                                     
+" 我的github:https://github.com/Alan-SK
+" 我的QQ:
+" ____   ___   __  ____   ___ _____ ____  _  _   _ 
+"|___ \ / _ \ / /_|___ \ / _ \___  | ___|| || | / |
+"  __) | | | | '_ \ __) | (_) | / /|___ \| || |_| |
+" / __/| |_| | (_) / __/ \__, |/ /  ___) |__   _| |
+"|_____|\___/ \___/_____|  /_//_/  |____/   |_| |_|
+                                                  
 " ===
 " === System Set
 " ===
@@ -64,7 +71,8 @@ call plug#end()
 " ===
 " === Map部分
 " ===
-noremap <leader><leader> <Esc>:nohlsearch<Cr>
+noremap <leader>$ <Esc>:nohlsearch<Cr>
+noremap <leader>. <Esc>#
 noremap <leader>r <Esc>:term ranger<Cr>
 noremap <leader>R <Esc>:set splitbelow<Cr>:sp<Cr>:term ranger<Cr>
 noremap ; :
@@ -98,6 +106,7 @@ noremap Q :q<Cr>
 noremap <C-l> :FloatermNew 
 noremap tx :r !figlet
 noremap tt :NERDTreeToggle<Cr>
+map * <nop>
 " ===
 " === Source部分
 " ===

@@ -32,7 +32,7 @@ set hlsearch
 " ===
 call plug#begin('~/.config/nvim/plugged')
 " 美化
-Plug 'vim-airline/vim-airline' " airline(状态栏)
+Plug 'theniceboy/eleline.vim' " 状态栏
 Plug 'vim-airline/vim-airline-themes' " airline主题
 Plug 'rakr/vim-one' "主题
 Plug 'dracula/vim' " airline主题

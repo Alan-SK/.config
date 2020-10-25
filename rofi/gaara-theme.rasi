@@ -1,0 +1,6 @@
+configuration {
+ modi: "window,run,ssh,drun";
+ show-icons: true;
+ font: "Source Code Pro 12";
+ drun-theme: "Flat-Remix-Blue-Dark";
+}

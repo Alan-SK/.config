@@ -14,6 +14,7 @@
 " ===
 " === System Set
 " ===
+set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
 set showcmd
 set splitbelow
 set nohlsearch
@@ -138,7 +139,7 @@ au FileType c,cpp,objc,objcpp,py,sh,fish,md,json,ts,js,html call rainbow#load()
 " ===
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " ===
-" === 代码编译器
+" === 代码编译器 " 如果你是用的是typescript请使用空格+r
 " ===
 noremap r :call CompileRunText()<Cr>
 func! CompileRunText()
@@ -229,4 +230,4 @@ let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
 let g:xtabline_settings.enable_persistance = 0
 let g:xtabline_settings.last_open_first = 1
 noremap to :XTabCycleMode<CR>
-noremap \p :echo expand('%:p')<CR>
+noremap <leader>p :echo expand('%:p')<CR>

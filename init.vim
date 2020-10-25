@@ -24,6 +24,7 @@ set relativenumber
 set wildmenu
 set hidden
 set cursorline
+let tabstop = 4
 syntax on
 let mapleader = " "
 set hlsearch
@@ -33,6 +34,7 @@ set hlsearch
 call plug#begin('~/.config/nvim/plugged')
 " 美化
 Plug 'theniceboy/eleline.vim' " 状态栏
+Plug 'mg979/vim-xtabline'
 Plug 'vim-airline/vim-airline-themes' " airline主题
 Plug 'rakr/vim-one' "主题
 Plug 'dracula/vim' " airline主题
@@ -43,6 +45,8 @@ Plug 'flazz/vim-colorschemes' " vim主题包
 " MarkDown
 Plug 'suan/vim-instant-markdown',{'for': 'markdown'} "MarkDown预览
 Plug 'dhruvasagar/vim-table-mode' " MarkDown表格工具
+" LaTex
+Plug 'vim-latex/vim-latex'
 " 工具
 Plug 'Chiel92/vim-autoformat' " 代码格式化
 Plug 'rhysd/vim-fixjson',{'for': 'json' } " json格式化
@@ -73,9 +77,9 @@ call plug#end()
 " ===
 " === Map部分
 " ===
+noremap <leader>r :sp<Cr>:term ts-node %<Cr>
 noremap <leader>$ <Esc>:nohlsearch<Cr>
 noremap <leader>. <Esc>#
-noremap <leader>r <Esc>:term ranger<Cr>
 noremap <leader>R <Esc>:set splitbelow<Cr>:sp<Cr>:term ranger<Cr>
 noremap ; :
 noremap sk :set nosplitbelow<Cr>:split<Cr>
@@ -105,17 +109,16 @@ noremap R :source ~/.config/nvim/init.vim<Cr>
 noremap <leader>rc :e ~/.config/nvim/init.vim<Cr>
 noremap S :w<Cr>
 noremap Q :q<Cr>
-noremap <C-l> :FloatermNew
+noremap <C-f> :FloatermNew
 noremap tx :r !figlet
-noremap tt :NERDTreeToggle<Cr>
+noremap tt :CocCommand explorer<Cr>
 map * <nop>
 " ===
 " === Source部分
 " ===
-source ~/.config/nvim/CocConfig.vim
-source ~/.config/nvim/md-snippets.vim
-source ~/.config/nvim/_machine_specific.vim
-
+source ~/.config/nvim/script/CocConfig.vim
+source ~/.config/nvim/script/md-snippets.vim
+source ~/.config/nvim/script/_machine_specific.vim
 " ===
 " === Snippets
 " ===
@@ -151,17 +154,24 @@ func! CompileRunText()
 		:sp
 		:term go run %
 	elseif &filetype == 'markdown'
-		:InstantMarkdownPreview<Cr>
+		:InstantMarkdownPreview
+	elseif &filetype == 'javascript'
+	        set splitbelow
+		:sp
+		:term node %
+	elseif &filetype == 'ts'
+	        set splitbelow
+		:sp
+		:term ts-node %
 
 	endif
 endfunction
 " ===
 " === Tabline
 " ===
-hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
-hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
-hi TabLineSel   ctermfg=White  ctermbg=DarkBlue
-let g:tablineclosebutton=1
+hi TabLine      ctermfg=DarkGray  ctermbg=DarkGray    cterm=NONE
+hi TabLineFill  ctermfg=DarkGray  ctermbg=DarkGray    cterm=NONE
+hi TabLine      ctermfg=DarkGray  ctermbg=DarkGray    cterm=NONE
 " ===
 " === easymotion
 " ===
@@ -195,3 +205,28 @@ let g:airline_theme='dracula'
 " === FixJson
 " ===
 au BufWrite *.json :FixJson
+" ===
+" === LaTex
+" ===
+filetype plugin on
+set grepprg=grep\ -nH\ $*
+filetype indent on
+let g:tex_flavor='latex'
+set sw=2
+set iskeyword+=:
+set laststatus=2
+set signcolumn=yes
+set showtabline=2
+set list
+set showcmd
+set t_Co=256
+" ===
+" === xtabline
+" ===
+let g:xtabline_settings = {}
+let g:xtabline_settings.enable_mappings = 0
+let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
+let g:xtabline_settings.enable_persistance = 0
+let g:xtabline_settings.last_open_first = 1
+noremap to :XTabCycleMode<CR>
+noremap \p :echo expand('%:p')<CR>
